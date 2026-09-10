@@ -1,0 +1,23 @@
+{
+  "properties": {
+    "roleName": "Fabric Capacity Lifecycle Operator",
+    "description": "Read, pause, and resume Microsoft Fabric capacities. Note: the documented permission set includes Microsoft.Fabric/capacities/write, which also permits changing a capacity's SKU. This role is not restricted to pause/resume alone.",
+    "type": "CustomRole",
+    "permissions": [
+      {
+        "actions": [
+          "Microsoft.Fabric/capacities/read",
+          "Microsoft.Fabric/capacities/write",
+          "Microsoft.Fabric/capacities/suspend/action",
+          "Microsoft.Fabric/capacities/resume/action"
+        ],
+        "notActions": [],
+        "dataActions": [],
+        "notDataActions": []
+      }
+    ],
+    "assignableScopes": [
+      "/subscriptions/<SUBSCRIPTION_ID>"
+    ]
+  }
+}

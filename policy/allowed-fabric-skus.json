@@ -1,0 +1,59 @@
+{
+  "properties": {
+    "displayName": "Allowed Microsoft Fabric capacity SKUs",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Restricts which Microsoft Fabric capacity F-SKUs may be created or updated. Capacities whose SKU is not in the allowed list are audited or denied according to the effect parameter.",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "Fabric",
+      "verifiedAlias": "Microsoft.Fabric/capacities/sku.name"
+    },
+    "parameters": {
+      "allowedSkus": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Allowed Fabric SKUs",
+          "description": "The list of Fabric capacity SKU names that are permitted, for example F2, F4, F8."
+        },
+        "defaultValue": [
+          "F2",
+          "F4",
+          "F8"
+        ]
+      },
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Audit logs non-compliant capacities. Deny blocks their creation or update. Disabled turns the policy off."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Fabric/capacities"
+          },
+          {
+            "not": {
+              "field": "Microsoft.Fabric/capacities/sku.name",
+              "in": "[parameters('allowedSkus')]"
+            }
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]"
+      }
+    }
+  }
+}

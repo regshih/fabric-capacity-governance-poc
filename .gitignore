@@ -1,0 +1,89 @@
+# ---------------------------------------------------------------------------
+# Environment / configuration containing real Azure identifiers
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+
+config/poc.yaml
+config/*.yaml
+!config/*.example.yaml
+local-config/
+secrets/
+credentials/
+artifacts/
+outputs/
+
+# ---------------------------------------------------------------------------
+# Credentials, keys, certificates
+# ---------------------------------------------------------------------------
+*.pem
+*.key
+*.pfx
+*.p12
+*.cer
+*.crt
+*.pub
+id_rsa*
+*.publishsettings
+
+# ---------------------------------------------------------------------------
+# Azure CLI / SDK token caches
+# ---------------------------------------------------------------------------
+.azure/
+.auth/
+azureProfile.json
+accessTokens.json
+msal_token_cache.*
+service-principal.json
+
+# ---------------------------------------------------------------------------
+# Infrastructure state (contains subscription IDs and resource IDs)
+# ---------------------------------------------------------------------------
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+*.tfvars
+!*.tfvars.example
+*.bicepparam
+!*.bicepparam.example
+
+# Deployment outputs that embed environment identifiers
+deployment-output*.json
+output*.json
+azuredeploy.parameters.json
+!azuredeploy.parameters.example.json
+
+# ---------------------------------------------------------------------------
+# Runtime results (may contain subscription/tenant/object IDs)
+# ---------------------------------------------------------------------------
+results/*
+!results/.gitkeep
+
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# ---------------------------------------------------------------------------
+# Logs / editor / OS
+# ---------------------------------------------------------------------------
+*.log
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
