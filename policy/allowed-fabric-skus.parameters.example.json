@@ -1,0 +1,12 @@
+{
+  "allowedSkus": {
+    "value": [
+      "F2",
+      "F4",
+      "F8"
+    ]
+  },
+  "effect": {
+    "value": "Audit"
+  }
+}

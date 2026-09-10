@@ -1,0 +1,28 @@
+# Illustrative configuration only. The current CLI reads .env.
+# Copy .env.example to .env for an actual deployment.
+azure:
+  subscription_id: ""
+  tenant_id: ""
+  resource_group: ""
+  location: ""
+capacity:
+  mode: existing
+  name: ""
+  administrator: ""
+  sku: F2
+  allow_creation: false
+  allow_existing_state_change: false
+automation:
+  enabled: true
+  account_name: ""
+  allow_existing_account_modification: false
+  schedules_enabled: false
+  time_zone: ""
+  resume_time: "07:00"
+  pause_time: "19:00"
+policy:
+  enabled: true
+  allowed_skus: [F2, F4, F8]
+  effect: Audit
+cleanup:
+  allow_deletion: false

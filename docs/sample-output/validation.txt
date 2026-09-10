@@ -1,0 +1,20 @@
+Fabric Capacity Governance POC - sanitized validation example
+
+Capacity: <CAPACITY_NAME>
+Resource group: <RESOURCE_GROUP>
+SKU: F2
+Initial state: Paused
+
+Resume API: PASS
+Active state verified: PASS
+Pause API: PASS
+Paused state verified: PASS
+Idempotent pause: PASS
+
+Policy alias: Microsoft.Fabric/capacities/sku.name
+Allowed F2 resource: PASS
+Disallowed F64 creation: DENIED (RequestDisallowedByPolicy)
+Temporary resource absent: PASS
+
+Final capacity state: Paused
+Overall result: PASS

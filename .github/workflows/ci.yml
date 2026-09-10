@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  offline-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Lint
+        run: python -m ruff check .
+      - name: Unit tests
+        run: python -m pytest tests/unit -q
+      - name: Python security analysis
+        run: python -m bandit -r src scripts -ll -ii
+      - name: Dependency vulnerability audit
+        run: python -m pip_audit -r requirements.txt --progress-spinner off
+      - name: Validate JSON
+        shell: pwsh
+        run: Get-ChildItem -Recurse -Filter *.json | ForEach-Object { Get-Content -Raw $_.FullName | ConvertFrom-Json | Out-Null }
+      - name: Parse runbook
+        shell: pwsh
+        run: |
+          $errors = $null
+          [void][System.Management.Automation.Language.Parser]::ParseFile(
+            "$PWD/automation/Set-FabricCapacityState.ps1",
+            [ref]$null,
+            [ref]$errors
+          )
+          if ($errors) { $errors | Out-String | Write-Error }
+      - name: Public repository safety check
+        run: python scripts/check_public_repo.py --include-history

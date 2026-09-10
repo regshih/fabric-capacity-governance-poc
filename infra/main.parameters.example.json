@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": { "value": "westus3" },
+    "capacityMode": { "value": "existing" },
+    "allowCapacityCreation": { "value": false },
+    "capacityName": { "value": "" },
+    "fabricSku": { "value": "F2" },
+    "capacityAdmin": { "value": "" },
+    "enableAutomation": { "value": false },
+    "automationAccountName": { "value": "" }
+  }
+}
